@@ -26,7 +26,7 @@ service.interceptors.response.use(
 );
 
 function request (options) {
-    options.method = options.method || 'get';
+    options.method = options.method || 'get'
     return service(options)
 }
 

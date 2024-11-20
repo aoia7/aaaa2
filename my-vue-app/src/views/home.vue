@@ -27,8 +27,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted,getCurrentInstance  } from 'vue'
 import axios from 'axios'
+const { proxy } = getCurrentInstance()
+
 const getImgUrl = (user) => {
     return new URL(`../assets/img/${user}.png`, import.meta.url).href
 }
@@ -55,14 +57,12 @@ const tableLabel = ref(
     }
 )
 
-axios({
-    url:'/api/home/getTableData',
-    method:'get'
-}).then(res=>{
-    if(res.data.code==200){
-        console.log(res.data.data.tableData);
-        tableData.value = res.data.data.tableData
-    }
+const getTableData = async () => {
+   const data = await proxy.$api.getTableData()
+   tableData.value = data.tableData
+}
+onMounted(() => {
+    getTableData()
 })
 </script>
 

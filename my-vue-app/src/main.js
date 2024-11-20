@@ -10,7 +10,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 导入createPinia函数
 import { createPinia } from 'pinia'
 import "@/api/mock.js"
-import api from '@/api/api'
+import api from '@/api/api.js'
 
 const pinia = createPinia()
 const app = createApp(App)

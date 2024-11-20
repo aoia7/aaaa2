@@ -9,32 +9,31 @@ export default {
                         todayBuy: 100,
                         monthBuy: 300,
                         totalBuy: 800
-                    },
+                    }
+                    ,
                     {
                         name: 'vivo',
                         todayBuy: 100,
                         monthBuy: 300,
                         totalBuy: 800
-                    },
+                    }
+                    ,
                     {
-                        name: 'apple',
+                        name: '苹果',
                         todayBuy: 100,
                         monthBuy: 300,
                         totalBuy: 800
-                    },
+                    }
+                    ,
                     {
                         name: '小米',
                         todayBuy: 100,
                         monthBuy: 300,
                         totalBuy: 800
-                    }, {
-                        name: '三星',
-                        todayBuy: 100,
-                        monthBuy: 300,
-                        totalBuy: 800
                     }
-                    , {
-                        name: '魅族',
+                    ,
+                    {
+                        name: '三星',
                         todayBuy: 100,
                         monthBuy: 300,
                         totalBuy: 800
