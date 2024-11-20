@@ -36,8 +36,8 @@ function request (options) {
     }
     //对mock开关的调整
     let isMock = config.mock
-    if(typeof config.mock !== 'undefined') {
-        isMock = config.mock
+    if(typeof options.mock !== 'undefined') {
+        isMock = options.mock
     }
 
     //针对环境做一个处理
