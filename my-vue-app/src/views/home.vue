@@ -50,8 +50,17 @@
         </el-card>
       </div>
       <el-card class="top-echart">
-        <div ref="echart" style="height: 240px; width: 100%;"></div>
+        <div ref="echart" style="height: 220px; width: 100%"></div>
       </el-card>
+
+      <div class="graph ">
+        <el-card>
+          <div ref="userEchart" style="height: 240px"></div>
+        </el-card>
+        <el-card>
+          <div ref="videoEchart" style="height: 240px"></div>
+        </el-card>
+      </div>
     </el-col>
   </el-row>
 </template>
@@ -86,7 +95,7 @@ const getCountData = async () => {
   // console.log("countData", countData.value[1])
 }
 const getChartData = async () => {
-  const {orderData} = await proxy.$api.getChartData()
+  const { orderData, videoData, userData } = await proxy.$api.getChartData()
   //对点一个图标进行X轴 和 series 数据的设置
   xOptions.xAxis.data = orderData.date
   xOptions.series = Object.keys(orderData.data[0]).map((val) => {
@@ -96,8 +105,52 @@ const getChartData = async () => {
       type: "line",
     }
   })
-  const oneEchart = echarts.init(proxy.$refs['echart'])
- oneEchart.setOption(xOptions)
+  const oneEchart = echarts.init(proxy.$refs["echart"])
+  oneEchart.setOption(xOptions)
+
+  //对第二个表格渲染
+  xOptions.xAxis.data = userData.map((item) => item.date)
+  xOptions.series = [
+    {
+      name: "新增用户",
+      data: userData.map((item) => item.new),
+      type: "bar",
+    },
+    {
+      name: "活跃用户",
+      data: userData.map((item) => item.active),
+      type: "bar",
+    },
+  ]
+  const twoEchart = echarts.init(proxy.$refs["userEchart"])
+  twoEchart.setOption(xOptions)
+
+  //对饼状图进行渲染
+  pieOptions.series =[
+    {
+      data: videoData,
+      type: "pie",
+    }
+  ]
+  const threeEchart = echarts.init(proxy.$refs["videoEchart"])
+  threeEchart.setOption(pieOptions)
+
+  //监听窗口大小变化
+  // window.addEventListener("resize", () => {
+  //   oneEchart.resize()
+  //   twoEchart.resize()
+  //   threeEchart.resize()
+  // })
+  observer.value = new ResizeObserver(() => {
+    oneEchart.resize()
+    twoEchart.resize()
+    threeEchart.resize()
+  })
+
+  //容器存在
+  if (proxy.$refs["echart"]) {
+    observer.value.observe(proxy.$refs["echart"])
+  }
 }
 onMounted(() => {
   getTableData()
@@ -117,9 +170,6 @@ const xOptions = reactive({
   },
   legend: {},
   //网格线
-  grid: {
-    left: "20%",
-  },
   //提示框
   tooltip: {
     trigger: "axis",
@@ -148,7 +198,7 @@ const xOptions = reactive({
     },
   ],
   color: ["#2ec7c9", "#b6a2de", "#5ab1ef", "#ffb980", "#d87a80", "#8d98b3"],
-  series:[]
+  series: [],
 })
 const pieOptions = reactive({
   tooltip: {
@@ -164,9 +214,8 @@ const pieOptions = reactive({
     "#3ed1cf",
   ],
   series: [],
-  legend:{}
+  legend: {},
 })
-
 </script>
 
 <style scoped lang="less">
@@ -245,6 +294,17 @@ const pieOptions = reactive({
       .txt {
         font-size: 14px;
       }
+    }
+  }
+  .graph {
+    display: flex;
+    justify-content: space-between;
+    height: 280px;
+    margin-top: 20px;
+
+    .el-card {
+      width: 48%;
+      height: 260px;
     }
   }
 }

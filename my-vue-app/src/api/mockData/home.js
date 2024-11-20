@@ -203,27 +203,27 @@ export default {
         ],
         userData:[
           {
-            data:'周一',
+            date:'周一',
             new: 5,
             active: 200,
           },
           {
-            data:'周二',
+            date:'周二',
             new: 10,
             active: 500,
           },
           {
-            data:'周三',
+            date:'周三',
             new: 12,
             active: 550,
           },
           {
-            data:'周四',
+            date:'周四',
             new: 60,
             active: 800,
           },
           {
-            data:'周五',
+            date:'周五',
             new: 20,
           }
         ]
