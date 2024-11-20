@@ -1,7 +1,8 @@
 <template>
-    <el-aside width="180px">
-        <el-menu background-color="#545c64" text-color="#fff" :collapse="false">
-            <h3>通用后台管理系统</h3>
+    <el-aside :width="width">
+        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse" :collapse-transition=false>
+            <h3 v-show="!isCollapse">通用后台管理系统</h3>
+            <h3 v-show="isCollapse">后台</h3>
             <el-menu-item v-for="item in noChildren" :index="item.path" :key="item.path">
                 <component class="icons" :is="item.icon"></component>
                 <span>{{ item.label }}</span>
@@ -12,7 +13,8 @@
                     <span>{{ item.label }}</span>
                 </template>
                 <el-menu-item-group title="Group One">
-                    <el-menu-item v-for="(subItem, subIndex) in item.children" :index="subItem.path" :key="subItem.path">
+                    <el-menu-item v-for="(subItem, subIndex) in item.children" :index="subItem.path"
+                        :key="subItem.path">
                         <component class="icons" :is="subItem.icon"></component>
                         <span>{{ subItem.label }}</span>
                     </el-menu-item>
@@ -24,6 +26,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useAllDataStore } from '@/stores'
 const list = ref([
     {
         path: '/home',
@@ -68,7 +71,6 @@ const list = ref([
         ]
     }
 ])
-// const router = useRouter()
 const noChildren = computed(() => {
     return list.value.filter(item => !item.children)// 过滤出没有子菜单的
 })
@@ -76,9 +78,11 @@ const hasChildren = computed(() => {
     return list.value.filter(item => item.children) // 过滤出有子菜单的
 })
 
-// const clickMenu(item) {
-//     router.push(item.path)
-// }
+const store = useAllDataStore()
+const isCollapse = computed(() => store.state.isCollapse)
+//宽度
+const width = computed(() => store.state.isCollapse ? '64px' : '200px')
+
 </script>
 
 <style scoped lang="less">

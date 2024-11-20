@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="l-content" >
-            <el-button size="small">
+            <el-button size="small" @click="handleCollapse">
                 <el-icon><Menu /></el-icon>
             </el-button>
             <el-breadcrumb separator="/" class="bread">
@@ -22,13 +22,20 @@
             </el-dropdown>
         </div>
     </div>
-    <!-- <component class="icons" is="Aim"></component> -->
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useAllDataStore } from '@/stores'
+
  const getImagUrl = (user)=>{
     return new URL(`../assets/img/${user}.png`,import.meta.url).href
+ }
+
+ const store = useAllDataStore()
+
+ const handleCollapse = () => {
+     store.state.isCollapse = !store.state.isCollapse
  }
 </script>
 
@@ -39,7 +46,6 @@ import { ref, computed } from 'vue'
     align-items: center;
     height: 60px;
     border-bottom: 1px solid #ccc;
-    padding: 0 20px;
     .l-content {
         display: flex;
         align-items: center;
