@@ -12,7 +12,7 @@
                     <component class="icons" :is="item.icon"></component>
                     <span>{{ item.label }}</span>
                 </template>
-                <el-menu-item-group title="Group One">
+                <el-menu-item-group>
                     <el-menu-item v-for="(subItem, subIndex) in item.children" :index="subItem.path"
                         :key="subItem.path">
                         <component class="icons" :is="subItem.icon"></component>

@@ -2,7 +2,6 @@
  * 整个项目api接口管理
  */
 
-import { mock } from "mockjs"
 import request from "./request"
 
 //请求首页左侧数据
@@ -24,6 +23,13 @@ export default {
   getChartData() {
     return request({
       url: "/home/getChartData",
+      method: "get",
+      mock:false
+    })
+  },
+  getUserData() {
+    return request({
+      url: "/home/getUserData",
       method: "get",
       mock:false
     })
