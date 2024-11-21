@@ -35,4 +35,28 @@ export default {
       data
     })
   },
+  deleteUser(data) {
+    return request({
+      url: "/home/deleteUser",
+      method: "get",
+      mock:false,
+      data
+    })
+  },
+  addUser(data) {
+    return request({
+      url: "/home/addUser",
+      method: "post",
+      mock:false,
+      data
+    })
+  },
+  editUser(data) {
+    return request({
+      url: "/home/editUser",
+      method: "post",
+      mock:false,
+      data
+    })
+  },
 }
