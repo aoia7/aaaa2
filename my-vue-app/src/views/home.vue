@@ -170,6 +170,10 @@ const xOptions = reactive({
   },
   legend: {},
   //网格线
+  grid: {
+    bottom: "10px",
+    containLabel: true,
+  },
   //提示框
   tooltip: {
     trigger: "axis",
@@ -300,7 +304,7 @@ const pieOptions = reactive({
     display: flex;
     justify-content: space-between;
     height: 280px;
-    margin-top: 20px;
+    margin-top: 10px;
 
     .el-card {
       width: 48%;
