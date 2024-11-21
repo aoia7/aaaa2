@@ -40,7 +40,7 @@ export default {
    * @returns {{code: number, count: number, data: *[]}}
    */
   getUserList: (config) => {
-    const { name, page = 1, limit = 20 } = param2Obj(config.url)
+    const { name, page = 1, limit = 10 } = param2Obj(config.url)
     const mockList = list.filter((user) => {
       //如果name存在，则过滤
       if (name && user.name.indexOf(name) === -1) return false

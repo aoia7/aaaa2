@@ -27,11 +27,12 @@ export default {
       mock:false
     })
   },
-  getUserData() {
+  getUserData(data) {
     return request({
       url: "/home/getUserData",
       method: "get",
-      mock:false
+      mock:false,
+      data
     })
   },
 }
