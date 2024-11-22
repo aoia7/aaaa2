@@ -13,6 +13,8 @@ function initState() {
       },
     ],
     currentMenu: null,
+    menuList: [],
+    token: "",
   }
 }
 export const useAllDataStore = defineStore("Alldata", () => {
@@ -31,5 +33,9 @@ export const useAllDataStore = defineStore("Alldata", () => {
     let index = state.value.tags.findIndex((item) => item.name === tag.name)
     state.value.tags.splice(index, 1)
   }
-  return { state, selectMenu , unDataMenu}
+
+  function updateMenuList(val) {
+    state.value.menuList = val
+  }
+  return { state, selectMenu , unDataMenu , updateMenuList }
 })
