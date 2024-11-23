@@ -1,6 +1,7 @@
 <template>
     <div class="not">
-        <h3>404 not found</h3>
+        <h3>404 Not Found</h3>
+        <hr>
         <el-button type="info" @click="goHome">去登陆</el-button>
     </div>
 </template>
@@ -25,6 +26,7 @@ const goHome = () => {
     h3 {
         font-size: 30px;
         margin-bottom: 20px;
+        
     }
 }
 </style>

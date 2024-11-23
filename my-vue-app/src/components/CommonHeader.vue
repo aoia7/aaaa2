@@ -6,6 +6,8 @@
             </el-button>
             <el-breadcrumb separator="/" class="bread">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="current" :to="current.path">{{current.label}}</el-breadcrumb-item>
+
             </el-breadcrumb>
         </div>
         <div class="r-content">
@@ -28,6 +30,7 @@
 import { ref, computed } from 'vue'
 import { useAllDataStore } from '@/stores'
 import { useRouter } from 'vue-router';
+import { CURRENT_CHANGE } from 'element-plus/es/components/tree-v2/src/virtual-tree.mjs';
 
  const getImagUrl = (user)=>{
     return new URL(`../assets/img/${user}.png`,import.meta.url).href
@@ -45,7 +48,7 @@ import { useRouter } from 'vue-router';
      router.push('/login')
  }
 
-
+const current = computed(() => store.state.currentMenu)
 </script>
 
 <style scoped lang="less">
