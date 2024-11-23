@@ -13,7 +13,7 @@
         v-for="item in noChildren"
         :index="item.path"
         :key="item.path"
-        @click="handlekMenu(item)"
+        @click="handleMenu(item)"
       >
         <component class="icons" :is="item.icon"></component>
         <span>{{ item.label }}</span>
@@ -32,7 +32,7 @@
             v-for="(subItem, subIndex) in item.children"
             :index="subItem.path"
             :key="subItem.path"
-            @click="handelkMenu(subItem)"
+            @click="handleMenu(subItem)"
           >
             <component class="icons" :is="subItem.icon"></component>
             <span>{{ subItem.label }}</span>
@@ -50,50 +50,51 @@ import { useAllDataStore } from "@/stores"
 
 const store = useAllDataStore()
 
-const list = ref([
-  {
-    path: "/home",
-    name: "home",
-    label: "首页",
-    icon: "house",
-    url: "Home",
-  },
-  {
-    path: "/mall",
-    name: "mall",
-    label: "商品管理",
-    icon: "video-play",
-    url: "Mall",
-  },
-  {
-    path: "/user",
-    name: "user",
-    label: "用户管理",
-    icon: "user",
-    url: "Uset",
-  },
-  {
-    path: "/other",
-    label: "其他",
-    icon: "location",
-    children: [
-      {
-        path: "/page1",
-        name: "page1",
-        label: "页面1",
-        icon: "setting",
-        url: "Page1",
-      },
-      {
-        path: "/page2",
-        name: "page2",
-        label: "页面2",
-        icon: "setting",
-        url: "Page2",
-      },
-    ],
-  },
-])
+// const list = ref([
+//   {
+//     path: "/home",
+//     name: "home",
+//     label: "首页",
+//     icon: "house",
+//     url: "Home",
+//   },
+//   {
+//     path: "/mall",
+//     name: "mall",
+//     label: "商品管理",
+//     icon: "video-play",
+//     url: "Mall",
+//   },
+//   {
+//     path: "/user",
+//     name: "user",
+//     label: "用户管理",
+//     icon: "user",
+//     url: "Uset",
+//   },
+//   {
+//     path: "/other",
+//     label: "其他",
+//     icon: "location",
+//     children: [
+//       {
+//         path: "/page1",
+//         name: "page1",
+//         label: "页面1",
+//         icon: "setting",
+//         url: "Page1",
+//       },
+//       {
+//         path: "/page2",
+//         name: "page2",
+//         label: "页面2",
+//         icon: "setting",
+//         url: "Page2",
+//       },
+//     ],
+//   },
+// ])
+const list = computed(() => store.state.menuList)
 const noChildren = computed(() => {
   return list.value.filter((item) => !item.children) // 过滤出没有子菜单的
 })
@@ -109,7 +110,7 @@ const width = computed(() => (store.state.isCollapse ? "64px" : "200px"))
 const router = useRouter()
 const route = useRoute()
 const activeMenu = computed(() => route.path)
-const handlekMenu = (item) => {
+const handleMenu = (item) => {
   router.push(item.path)
   store.selectMenu(item)
 }

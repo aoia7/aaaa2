@@ -37,10 +37,10 @@ const store = useAllDataStore()
 const router = useRouter()
 const handlelogin = async () => {
   let res = await proxy.$api.getMenu(loginForm)
-  console.log(res)
   store.updateMenuList(res.menuList)
   store.state.token = res.token
-  router.push("/home")
+  store.addMenu(router)
+  router.push("/home")  
 }
 </script>
 
